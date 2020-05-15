@@ -357,6 +357,7 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  */
 function getItemsSum(arr) {
   return arr.reduce((n, num) => n + num, 0);
+}
 
 /**
  * Returns the number of all falsy value in the specified array
