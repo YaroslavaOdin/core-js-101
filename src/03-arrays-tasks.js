@@ -21,12 +21,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-  for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i] === value) {
-      return i;
-    }
-  }
-  return -1;
+  return arr.indexOf(value);
 }
 
 /**
@@ -279,14 +274,14 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  /* const resArr = [];
-  arr.map((el, index) => {
-    for (let i = 0; i < arr.length; i =+ 1) {
-      return resArr.push(el + resArr[index - 1]);
-    }
+function propagateItemsByPositionIndex(arr) {
+  const result = [];
+  arr.map((elem, index) => {
+    const mas = new Array(index + 1);
+    mas.fill(elem);
+    return result.push(...mas);
   });
-  return resArr; */
+  return result;
 }
 
 
@@ -339,8 +334,20 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const number = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  return arr.sort((a, b) => number.indexOf(a) - number.indexOf(b));
 }
 
 /**
@@ -371,8 +378,8 @@ function getItemsSum(arr) {
  *  [ -1, 'false', null, 0 ] => 2
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.filter((item) => !!item === false).length;
 }
 
 /**
