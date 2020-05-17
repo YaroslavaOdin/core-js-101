@@ -397,8 +397,17 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let directoryPath = '';
+  const checkPath = pathes[0].split('/');
+  for (let i = 0; i < checkPath.length; i += 1) {
+    const str = checkPath[i];
+    if (!pathes.every((el) => el.split('/')[i] === str)) {
+      return directoryPath;
+    }
+    directoryPath += `${str}/`;
+  }
+  return directoryPath;
 }
 
 
@@ -420,8 +429,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const result = [];
+  for (let i = 0; i < m1.length; i += 1) {
+    result[i] = [];
+    for (let j = 0; j < m2[0].length; j += 1) {
+      let sum = 0;
+      for (let k = 0; k < m1[0].length; k += 1) {
+        sum += m1[i][k] * m2[k][j];
+      }
+      result[i][j] = sum;
+    }
+  }
+  return result;
 }
 
 
@@ -455,8 +475,25 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  function characterSymbol(arr, symbol) {
+    if (arr.some((str) => str.every((i) => (i === symbol && str.length === 3)))
+      || arr.every((str) => (str[0] === symbol))
+      || arr.every((str) => (str[1] === symbol))
+      || arr.every((str) => (str[2] === symbol))) {
+      return symbol;
+    }
+    for (let i = 0; i <= 3; i += 1) {
+      if (arr[i][i] !== symbol) break;
+      if (i === 2) return symbol;
+    }
+    for (let i = 2; i >= 0; i -= 1) {
+      if (arr[2 - i][i] !== symbol) break;
+      if (i === 0) return symbol;
+    }
+    return undefined;
+  }
+  return characterSymbol(position, 'X') || characterSymbol(position, '0');
 }
 
 
